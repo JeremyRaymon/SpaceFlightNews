@@ -25,7 +25,7 @@ struct Article: Codable, Hashable {
         title: "Maxar unveils platform to speed up imagery access",
         imageUrl: "https://spacenews.com/maxar-unveils-platform-to-speed-up-imagery-access/",
         newsSite: "SpaceNews",
-        summary: "MGP platform is designed to simplify and speed up access to the Colorado company’s high-resolution Earth imagery.",
+        summary: "MGP platform is designed to simplify and speed up access to the Colorado company’s high-resolution Earth imagery.Lorem Ipsum.",
         publishedAt: Date()
     )
 }
