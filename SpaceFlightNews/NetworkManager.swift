@@ -9,10 +9,13 @@ import Foundation
 
 class NetworkManager {
     static let shared = NetworkManager()
-    private init() { }
-    
     let decoder = JSONDecoder()
     let baseURL = "https://api.spaceflightnewsapi.net/v4/"
+    
+    private init() {
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+    }
     
     func fetchArticles() async throws -> [Article] {
         let endpoint = baseURL + "articles/"
@@ -50,7 +53,7 @@ class NetworkManager {
         
         do {
             let newsSites = try decoder.decode(NewsSites.self, from: data)
-            return newsSites.news_sites
+            return newsSites.newsSites
         } catch {
             throw NSError(domain: "Bad Data", code: 400)
         }

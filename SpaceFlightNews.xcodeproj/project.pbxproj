@@ -15,6 +15,8 @@
 		6C96C5F92C47B62600569E37 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C5F82C47B62600569E37 /* NetworkManager.swift */; };
 		6C96C5FB2C47B78B00569E37 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C5FA2C47B78A00569E37 /* Articles.swift */; };
 		6C96C5FF2C47BDD100569E37 /* NewsSites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C5FE2C47BDD100569E37 /* NewsSites.swift */; };
+		6C96C6012C47CB8700569E37 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C6002C47CB8700569E37 /* DetailView.swift */; };
+		6C96C6032C47CDCD00569E37 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C6022C47CDCD00569E37 /* Date+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		6C96C5F82C47B62600569E37 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6C96C5FA2C47B78A00569E37 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
 		6C96C5FE2C47BDD100569E37 /* NewsSites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSites.swift; sourceTree = "<group>"; };
+		6C96C6002C47CB8700569E37 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		6C96C6022C47CDCD00569E37 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,12 +65,14 @@
 			children = (
 				6C96C5E82C47AC4100569E37 /* SpaceFlightNewsApp.swift */,
 				6C96C5EA2C47AC4100569E37 /* ContentView.swift */,
+				6C96C6002C47CB8700569E37 /* DetailView.swift */,
 				6C96C5F62C47ACA200569E37 /* NewsView.swift */,
 				6C96C5F82C47B62600569E37 /* NetworkManager.swift */,
 				6C96C5FE2C47BDD100569E37 /* NewsSites.swift */,
 				6C96C5EC2C47AC4200569E37 /* Assets.xcassets */,
 				6C96C5EE2C47AC4200569E37 /* Preview Content */,
 				6C96C5FA2C47B78A00569E37 /* Articles.swift */,
+				6C96C6022C47CDCD00569E37 /* Date+Ext.swift */,
 			);
 			path = SpaceFlightNews;
 			sourceTree = "<group>";
@@ -152,6 +158,8 @@
 				6C96C5F92C47B62600569E37 /* NetworkManager.swift in Sources */,
 				6C96C5FB2C47B78B00569E37 /* Articles.swift in Sources */,
 				6C96C5F72C47ACA200569E37 /* NewsView.swift in Sources */,
+				6C96C6032C47CDCD00569E37 /* Date+Ext.swift in Sources */,
+				6C96C6012C47CB8700569E37 /* DetailView.swift in Sources */,
 				6C96C5EB2C47AC4100569E37 /* ContentView.swift in Sources */,
 				6C96C5E92C47AC4100569E37 /* SpaceFlightNewsApp.swift in Sources */,
 				6C96C5FF2C47BDD100569E37 /* NewsSites.swift in Sources */,

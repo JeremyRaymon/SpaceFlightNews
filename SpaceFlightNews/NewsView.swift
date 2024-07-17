@@ -13,7 +13,7 @@ struct NewsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(article.title)
-            Text(article.news_site)
+            Text(article.newsSite)
                 .font(.caption)
                 .bold()
         }

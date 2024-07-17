@@ -23,16 +23,27 @@ struct ContentView: View {
             }
             .pickerStyle(.menu)
             List(filteredArticles, id: \.self) { article in
-                NewsView(article: article)
-                    .tag(article.news_site)
+                NavigationLink(value: article) {
+                    NewsView(article: article)
+                }
             }
+            .navigationDestination(for: Article.self, destination: DetailView.init)
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        print("Button pressed")
+                    }, label: {
+                        /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+                    })
+                }
+            })
         }
         .searchable(text: $searchString, prompt: "Search Title...")
+        
         .task {
             do {
                 articles = try await NetworkManager.shared.fetchArticles()
                 newsSites = try await NetworkManager.shared.fetchNewsSites()
-                print(newsSites)
             } catch {
                 print("Error fetching articles")
             }
@@ -45,7 +56,7 @@ struct ContentView: View {
             filteredArticles = filteredArticles.filter{ $0.title.localizedStandardContains(searchString)}
         }
         if selectedNewsSite != "All" {
-            filteredArticles = filteredArticles.filter{$0.news_site.elementsEqual(selectedNewsSite) }
+            filteredArticles = filteredArticles.filter{$0.newsSite.elementsEqual(selectedNewsSite) }
         }
         return filteredArticles
     }

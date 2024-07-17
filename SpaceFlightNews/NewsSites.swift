@@ -8,5 +8,5 @@
 import Foundation
 
 struct NewsSites: Codable {
-    let news_sites: [String]
+    let newsSites: [String]
 }
