@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArticleListView: View {
     @StateObject var vm = ArticleListViewModel()
-    
+        
     var body: some View {
         NavigationStack {
             Picker("News Sites", selection: $vm.selectedNewsSite) {
@@ -35,7 +35,10 @@ struct ArticleListView: View {
                 }
             })
         }
-        .searchable(text: $vm.searchString, prompt: "Search Title...")
+        .searchable(text: $vm.searchText, prompt: "Search Title...")
+        .onSubmit(of: .search) {
+            print("submitted")
+        }
         .task {
             do {
                 vm.articles = try await NetworkManager.shared.fetchArticles()

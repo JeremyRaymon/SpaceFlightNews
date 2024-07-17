@@ -18,8 +18,11 @@ struct Article: Codable, Hashable {
     let newsSite: String
     let summary: String
     let publishedAt: Date
-//    let published_at: String
     
+    func toSavedArticle() -> SavedArticle {
+        SavedArticle(id: self.id, title: self.title, imageUrl: self.imageUrl, newsSite: self.newsSite, summary: self.summary, publishedAt: self.publishedAt)
+    }
+
     static let preview = Article(
         id: 20000,
         title: "Maxar unveils platform to speed up imagery access",

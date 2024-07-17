@@ -18,6 +18,10 @@
 		6C96C6012C47CB8700569E37 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C6002C47CB8700569E37 /* DetailView.swift */; };
 		6C96C6032C47CDCD00569E37 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C6022C47CDCD00569E37 /* Date+Ext.swift */; };
 		6C96C60E2C47DF7600569E37 /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C60D2C47DF7600569E37 /* ArticleListViewModel.swift */; };
+		6CDBDFE02C48103500B22900 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDBDFDF2C48103500B22900 /* CoreDataManager.swift */; };
+		6CDBDFE42C48153B00B22900 /* PersistentStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6CDBDFE22C48153B00B22900 /* PersistentStorage.xcdatamodeld */; };
+		6CDBDFE62C48177C00B22900 /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDBDFE52C48177C00B22900 /* SearchHistory.swift */; };
+		6CDBDFE82C481E0100B22900 /* SavedArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDBDFE72C481E0100B22900 /* SavedArticle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		6C96C6002C47CB8700569E37 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		6C96C6022C47CDCD00569E37 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		6C96C60D2C47DF7600569E37 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModel.swift; sourceTree = "<group>"; };
+		6CDBDFDF2C48103500B22900 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		6CDBDFE32C48153B00B22900 /* PersistentStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersistentStorage.xcdatamodel; sourceTree = "<group>"; };
+		6CDBDFE52C48177C00B22900 /* SearchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
+		6CDBDFE72C481E0100B22900 /* SavedArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 		6C96C6042C47DC7D00569E37 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6CDBDFE12C48152E00B22900 /* Data */,
 				6C96C60C2C47DD9B00569E37 /* Managers */,
 				6C96C60B2C47DD8C00569E37 /* Extensions */,
 				6C96C60A2C47DD8600569E37 /* Entities */,
@@ -132,6 +141,8 @@
 			children = (
 				6C96C5FE2C47BDD100569E37 /* NewsSites.swift */,
 				6C96C5FA2C47B78A00569E37 /* Articles.swift */,
+				6CDBDFE52C48177C00B22900 /* SearchHistory.swift */,
+				6CDBDFE72C481E0100B22900 /* SavedArticle.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -148,8 +159,17 @@
 			isa = PBXGroup;
 			children = (
 				6C96C5F82C47B62600569E37 /* NetworkManager.swift */,
+				6CDBDFDF2C48103500B22900 /* CoreDataManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		6CDBDFE12C48152E00B22900 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6CDBDFE22C48153B00B22900 /* PersistentStorage.xcdatamodeld */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,12 +244,16 @@
 			files = (
 				6C96C5F92C47B62600569E37 /* NetworkManager.swift in Sources */,
 				6C96C5FB2C47B78B00569E37 /* Articles.swift in Sources */,
+				6CDBDFE42C48153B00B22900 /* PersistentStorage.xcdatamodeld in Sources */,
 				6C96C5F72C47ACA200569E37 /* NewsView.swift in Sources */,
 				6C96C6032C47CDCD00569E37 /* Date+Ext.swift in Sources */,
 				6C96C60E2C47DF7600569E37 /* ArticleListViewModel.swift in Sources */,
 				6C96C6012C47CB8700569E37 /* DetailView.swift in Sources */,
 				6C96C5EB2C47AC4100569E37 /* ArticleListView.swift in Sources */,
 				6C96C5E92C47AC4100569E37 /* SpaceFlightNewsApp.swift in Sources */,
+				6CDBDFE02C48103500B22900 /* CoreDataManager.swift in Sources */,
+				6CDBDFE62C48177C00B22900 /* SearchHistory.swift in Sources */,
+				6CDBDFE82C481E0100B22900 /* SavedArticle.swift in Sources */,
 				6C96C5FF2C47BDD100569E37 /* NewsSites.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +460,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6CDBDFE22C48153B00B22900 /* PersistentStorage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6CDBDFE32C48153B00B22900 /* PersistentStorage.xcdatamodel */,
+			);
+			currentVersion = 6CDBDFE32C48153B00B22900 /* PersistentStorage.xcdatamodel */;
+			name = PersistentStorage.xcdatamodeld;
+			path = /Users/jeremyraymond/Documents/Developer/IOS/IOSProjects/SpaceFlightNews/SpaceFlightNews/Core/Data/PersistentStorage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6C96C5DD2C47AC4100569E37 /* Project object */;
 }
