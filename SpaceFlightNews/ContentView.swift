@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var searchString = ""
+    @State var articles: [Article] = []
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List(articles, id: \.self) { article in
+                NewsView(article: article)
+            }
         }
-        .padding()
+        .searchable(text: $searchString, prompt: "Search Title...")
+        .task {
+            do {
+                articles = try await NetworkManager.shared.fetchArticles()
+            } catch {
+                print("Error fetching articles")
+            }
+        }
     }
 }
 
