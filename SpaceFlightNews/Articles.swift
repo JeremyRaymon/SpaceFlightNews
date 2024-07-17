@@ -14,6 +14,7 @@ struct ArticlesWrapper: Codable {
 struct Article: Codable, Hashable {
     let id: Int
     let title: String
+    let news_site: String
     
-    static let preview = Article(id: 0, title: "Example Article")
+    static let preview = Article(id: 0, title: "Example Article", news_site: "Example News Site")
 }
