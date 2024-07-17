@@ -58,4 +58,18 @@ class NetworkManager {
             throw NSError(domain: "Bad Data", code: 400)
         }
     }
+    
+    func downloadImage(imageUrl: String) async throws -> Data {
+        guard let url = URL(string: imageUrl) else {
+            throw NSError(domain: "Bad URL", code: 400)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw NSError(domain: "Bad Data", code: 400)
+        }
+        
+        return data
+    }
 }
