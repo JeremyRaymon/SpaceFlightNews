@@ -12,29 +12,35 @@ struct SearchHistoryView: View {
     
     var body: some View {
         VStack {
-            List {
-                ForEach($vm.searchHistories, id:\.self) { $searchHistory in
-                    DisclosureGroup {
-                        ForEach(Array(searchHistory.articleentity as! Set<ArticleEntity>), id:\.self) { article in
-                            Text(article.title ?? "")
+            Group {
+                if vm.searchHistories.isEmpty {
+                    ContentUnavailableView("There is no Search History yet", systemImage: "exclamationmark.arrow.circlepath")
+                } else {
+                    List {
+                        ForEach($vm.searchHistories, id:\.self) { $searchHistory in
+                            DisclosureGroup {
+                                ForEach(Array(searchHistory.articleentity as! Set<ArticleEntity>), id:\.self) { article in
+                                    Text(article.title ?? "")
+                                }
+                            } label: {
+                                Text(searchHistory.searchText ?? "")
+                            }
                         }
-                    } label: {
-                        Text(searchHistory.searchText ?? "")
+                        .onDelete(perform: { indexSet in
+                            vm.deleteSearchHistory(indexSet: indexSet)
+                        })
                     }
                 }
-                .onDelete(perform: { indexSet in
-                    vm.deleteSearchHistory(indexSet: indexSet)
-                })
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        vm.deleteAllSearchHistory()
-                    }, label: {
-                        Text("Delete All")
-                    })
-                    .tint(.red)
-                }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    vm.deleteAllSearchHistory()
+                }, label: {
+                    Text("Delete All")
+                })
+                .tint(.red)
             }
         }
         .task {

@@ -8,17 +8,21 @@
 import Foundation
 import CoreData
 
+enum CoreDataError: String, Error {
+    case fetchError = "Error fetching data"
+    case saveError = "Error saving data"
+}
+
 class CoreDataManager: ObservableObject {
     static let shared = CoreDataManager()
     let container = NSPersistentContainer(name: "PersistentStorage")
     var searchHistories: [SearchHistoryEntity] = []
     
     private init() {
-        setArticleTransformer()
-        
         container.loadPersistentStores { storeDescription, error in
 //            self.deleteAllSearchHistory()
             if let error = error as? NSError {
+                
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
             self.fetchSearchHistories()
@@ -29,17 +33,13 @@ class CoreDataManager: ObservableObject {
         return container.viewContext
     }
     
-    func setArticleTransformer() {
-        ValueTransformer.setValueTransformer(SavedArticleTransformer(), forName: NSValueTransformerName("SavedArticleTransformer"))
-    }
-    
     func save() {
         guard context.hasChanges else { return }
         do {
             try context.save()
             self.fetchSearchHistories()
         } catch {
-            print("Error saving data: \(error)")
+            print(CoreDataError.saveError)
         }
     }
     
@@ -53,7 +53,7 @@ class CoreDataManager: ObservableObject {
                 print(searchHistory.articleentity?.count)
             }
         } catch {
-            print("Error fetching search histories: \(error)")
+            print(CoreDataError.fetchError)
         }
     }
     
@@ -63,8 +63,6 @@ class CoreDataManager: ObservableObject {
         for article in articles {
             addArticle(article: article, searchHistory: searchHistoryEntity)
         }
-//        print(searchHistoryEntity.articleentity?.title)
-//        searchHistoryEntity.articles = articles
         
         save()
     }

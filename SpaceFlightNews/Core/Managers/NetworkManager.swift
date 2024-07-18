@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum NetworkError: String, Error {
+    case invalidURL = "Invalid URL from the server. Please try again."
+    case invalidResponse = "Invalid Response from the server. Please try again."
+    case invalidData = "Invalid Data from the server. Please try again."
+}
+
 class NetworkManager {
     static let shared = NetworkManager()
     let decoder = JSONDecoder()
@@ -21,20 +27,20 @@ class NetworkManager {
         let endpoint = baseURL + "articles/?limit=10&offset=\(offset)"
         
         guard let url = URL(string: endpoint) else {
-            throw NSError(domain: "Bad URL", code: 400)
+            throw NetworkError.invalidURL
         }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NSError(domain: "Bad Response", code: 400)
+            throw NetworkError.invalidResponse
         }
         
         do {
             let articlesWrapper = try decoder.decode(ArticlesWrapper.self, from: data)
             return articlesWrapper.results
         } catch {
-            throw NSError(domain: "Bad Data", code: 400)
+            throw NetworkError.invalidData
         }
     }
     
@@ -42,32 +48,32 @@ class NetworkManager {
         let endpoint = baseURL + "info/"
         
         guard let url = URL(string: endpoint) else {
-            throw NSError(domain: "Bad URL", code: 400)
+            throw NetworkError.invalidURL
         }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NSError(domain: "Bad Response", code: 400)
+            throw NetworkError.invalidResponse
         }
         
         do {
             let newsSites = try decoder.decode(NewsSitesWrapper.self, from: data)
             return newsSites.newsSites
         } catch {
-            throw NSError(domain: "Bad Data", code: 400)
+            throw NetworkError.invalidData
         }
     }
     
     func downloadImage(imageUrl: String) async throws -> Data {
         guard let url = URL(string: imageUrl) else {
-            throw NSError(domain: "Bad URL", code: 400)
+            throw NetworkError.invalidURL
         }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NSError(domain: "Bad Data", code: 400)
+            throw NetworkError.invalidData
         }
         
         return data

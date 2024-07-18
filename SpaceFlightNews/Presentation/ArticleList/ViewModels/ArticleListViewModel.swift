@@ -33,7 +33,6 @@ class ArticleListViewModel: ObservableObject {
     
     func saveSearchHistory() {
         CoreDataManager.shared.addSearchHistory(searchText: searchText, articles: filteredArticles)
-//        CoreDataManager.shared.addSearchHistory(searchText: searchText, articles: filteredArticles.map({$0.toSavedArticle()}))
         print(CoreDataManager.shared.searchHistories)
     }
 }

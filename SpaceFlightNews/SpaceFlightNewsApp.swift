@@ -12,7 +12,7 @@ struct SpaceFlightNewsApp: App {
     var body: some Scene {
         WindowGroup {
             ArticleListView()
-//                .environment(\.managedObjectContext, CoreDataManager.shared.context)
+                .environment(\.managedObjectContext, CoreDataManager.shared.context)
         }
     }
 }

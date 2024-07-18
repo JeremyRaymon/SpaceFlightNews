@@ -18,10 +18,6 @@ struct Article: Codable, Hashable {
     let newsSite: String
     let summary: String
     let publishedAt: Date
-    
-    func toSavedArticle() -> SavedArticle {
-        SavedArticle(id: self.id, title: self.title, imageUrl: self.imageUrl, newsSite: self.newsSite, summary: self.summary, publishedAt: self.publishedAt)
-    }
 
     static let preview = Article(
         id: 20000,

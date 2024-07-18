@@ -22,7 +22,6 @@
 		6CDBDFE42C48153B00B22900 /* PersistentStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6CDBDFE22C48153B00B22900 /* PersistentStorage.xcdatamodeld */; };
 		6CF23F292C48CE6400B53190 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF23F282C48CE6400B53190 /* SearchHistoryViewModel.swift */; };
 		6CF3C3AA2C482FAC0046082A /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF3C3A92C482FAC0046082A /* SearchHistoryView.swift */; };
-		6CF3C3AC2C4835640046082A /* SavedArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF3C3AB2C4835640046082A /* SavedArticle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +42,6 @@
 		6CF23F282C48CE6400B53190 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
 		6CF23F2A2C49016B00B53190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6CF3C3A92C482FAC0046082A /* SearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryView.swift; sourceTree = "<group>"; };
-		6CF3C3AB2C4835640046082A /* SavedArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +144,6 @@
 			children = (
 				6C96C5FE2C47BDD100569E37 /* NewsSitesWrapper.swift */,
 				6C96C5FA2C47B78A00569E37 /* Article.swift */,
-				6CF3C3AB2C4835640046082A /* SavedArticle.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -283,7 +280,6 @@
 				6C96C5EB2C47AC4100569E37 /* ArticleListView.swift in Sources */,
 				6C96C5E92C47AC4100569E37 /* SpaceFlightNewsApp.swift in Sources */,
 				6CDBDFE02C48103500B22900 /* CoreDataManager.swift in Sources */,
-				6CF3C3AC2C4835640046082A /* SavedArticle.swift in Sources */,
 				6C96C5FF2C47BDD100569E37 /* NewsSitesWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
