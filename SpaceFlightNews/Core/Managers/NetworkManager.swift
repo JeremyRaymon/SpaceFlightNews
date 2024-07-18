@@ -52,7 +52,7 @@ class NetworkManager {
         }
         
         do {
-            let newsSites = try decoder.decode(NewsSites.self, from: data)
+            let newsSites = try decoder.decode(NewsSitesWrapper.self, from: data)
             return newsSites.newsSites
         } catch {
             throw NSError(domain: "Bad Data", code: 400)

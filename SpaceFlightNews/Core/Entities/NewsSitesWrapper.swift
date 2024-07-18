@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct NewsSites: Codable {
+struct NewsSitesWrapper: Codable {
     let newsSites: [String]
 }

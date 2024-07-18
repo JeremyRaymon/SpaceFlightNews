@@ -27,17 +27,17 @@ struct ArticleListView: View {
             .navigationDestination(for: Article.self, destination: DetailView.init)
             .toolbar(content: {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        print("Button pressed")
-                    }, label: {
+                    NavigationLink {
+                        SearchHistoryView()
+                    } label: {
                         /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
-                    })
+                    }
                 }
             })
         }
         .searchable(text: $vm.searchText, prompt: "Search Title...")
         .onSubmit(of: .search) {
-            print("submitted")
+            vm.saveSearchHistory()
         }
         .task {
             do {

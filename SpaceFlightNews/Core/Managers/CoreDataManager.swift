@@ -14,11 +14,14 @@ class CoreDataManager: ObservableObject {
     var searchHistories: [SearchHistoryEntity] = []
     
     private init() {
+        setArticleTransformer()
+        
         container.loadPersistentStores { storeDescription, error in
+//            self.deleteAllSearchHistory()
             if let error = error as? NSError {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            self.searchHistories = self.fetchSearchHistories()
+            self.fetchSearchHistories()
         }
     }
     
@@ -26,31 +29,53 @@ class CoreDataManager: ObservableObject {
         return container.viewContext
     }
     
+    func setArticleTransformer() {
+        ValueTransformer.setValueTransformer(SavedArticleTransformer(), forName: NSValueTransformerName("SavedArticleTransformer"))
+    }
+    
     func save() {
         guard context.hasChanges else { return }
         do {
             try context.save()
+            self.fetchSearchHistories()
         } catch {
             print("Error saving data: \(error)")
         }
     }
     
-    func fetchSearchHistories() -> [SearchHistoryEntity] {
+    func fetchSearchHistories() {
         let request = NSFetchRequest<SearchHistoryEntity>(entityName: "SearchHistoryEntity")
         
         do {
             searchHistories = try context.fetch(request)
+            print(searchHistories.count)
+            for searchHistory in searchHistories {
+                print(searchHistory.articleentity?.count)
+            }
         } catch {
             print("Error fetching search histories: \(error)")
         }
-        
-        return searchHistories
     }
     
-    func addSearchHistory(searchHistory: SearchHistory) {
+    func addSearchHistory(searchText: String, articles: [Article]) {
         let searchHistoryEntity = SearchHistoryEntity(context: context)
-        searchHistoryEntity.searchText = searchHistory.searchText
-        searchHistoryEntity.articles = searchHistory.articles
+        searchHistoryEntity.searchText = searchText
+        for article in articles {
+            addArticle(article: article, searchHistory: searchHistoryEntity)
+        }
+//        print(searchHistoryEntity.articleentity?.title)
+//        searchHistoryEntity.articles = articles
+        
+        save()
+    }
+    
+    func addArticle(article: Article, searchHistory: SearchHistoryEntity) {
+        let articleEntity = ArticleEntity(context: context)
+        articleEntity.id = Int32(article.id)
+        articleEntity.title = article.title
+        articleEntity.newssite = article.newsSite
+        articleEntity.summary = article.summary
+        articleEntity.searchhistoryentity = searchHistory
         
         save()
     }
