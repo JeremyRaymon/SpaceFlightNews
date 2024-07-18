@@ -12,6 +12,7 @@ class ArticleListViewModel: ObservableObject {
     @Published var selectedNewsSite = "All"
     @Published var articles: [Article] = []
     @Published var newsSites: [String] = []
+    var offset: Int = 0
     
     var filteredArticles: [Article] {
         var filteredArticles = articles
@@ -22,6 +23,12 @@ class ArticleListViewModel: ObservableObject {
             filteredArticles = filteredArticles.filter{$0.newsSite.elementsEqual(selectedNewsSite) }
         }
         return filteredArticles
+    }
+    
+    @MainActor
+    func loadMoreArticles() async throws {
+        offset += 10
+        articles.append(contentsOf: try await NetworkManager.shared.fetchArticles(offset: offset))
     }
     
     func saveSearchHistory() {

@@ -19,9 +19,31 @@ struct ArticleListView: View {
                 }
             }
             .pickerStyle(.menu)
-            List(vm.filteredArticles, id: \.self) { article in
-                NavigationLink(value: article) {
-                    NewsView(article: article)
+            List {
+                ForEach(vm.filteredArticles, id: \.self) { article in
+                    VStack {
+                        AsyncImage(url: URL(string: article.imageUrl)) { image in
+                            image
+                                .resizable()
+                        } placeholder: {
+                            ProgressView()
+                                .controlSize(.large)
+                                .frame(height: 128)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 128)
+                        
+                        NavigationLink(value: article) {
+                            NewsView(article: article)
+                        }
+                    }
+                    .onAppear(perform: {
+                        if vm.filteredArticles.last?.id == article.id {
+                            print("Reached last: \(article.id)")
+                            Task {
+                                try await vm.loadMoreArticles()
+                            }
+                        }
+                    })
                 }
             }
             .navigationDestination(for: Article.self, destination: DetailView.init)
@@ -31,21 +53,26 @@ struct ArticleListView: View {
                         SearchHistoryView()
                     } label: {
                         /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+                        
                     }
                 }
             })
         }
+        .padding(.bottom)
         .searchable(text: $vm.searchText, prompt: "Search Title...")
         .onSubmit(of: .search) {
             vm.saveSearchHistory()
         }
-        .task {
-            do {
-                vm.articles = try await NetworkManager.shared.fetchArticles()
-                vm.newsSites = try await NetworkManager.shared.fetchNewsSites()
-            } catch {
-                print("Error fetching articles")
+        .onAppear {
+            Task {
+                do {
+                    vm.articles.append(contentsOf: try await NetworkManager.shared.fetchArticles())
+                    vm.newsSites = try await NetworkManager.shared.fetchNewsSites()
+                } catch {
+                    print("Error fetching articles")
+                }
             }
+            
         }
     }
 }

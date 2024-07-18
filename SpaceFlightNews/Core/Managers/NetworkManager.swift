@@ -17,8 +17,8 @@ class NetworkManager {
         decoder.dateDecodingStrategy = .iso8601
     }
     
-    func fetchArticles() async throws -> [Article] {
-        let endpoint = baseURL + "articles/"
+    func fetchArticles(offset: Int = 0) async throws -> [Article] {
+        let endpoint = baseURL + "articles/?limit=10&offset=\(offset)"
         
         guard let url = URL(string: endpoint) else {
             throw NSError(domain: "Bad URL", code: 400)
