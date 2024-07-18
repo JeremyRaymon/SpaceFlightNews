@@ -9,19 +9,22 @@ import SwiftUI
 
 struct SearchHistoryView: View {
     @StateObject var vm = SearchHistoryViewModel()
-    @State var toggle = false
     
     var body: some View {
         VStack {
-            List($vm.searchHistories, id:\.self) { $searchHistory in
-                DisclosureGroup {
-                    ForEach(Array(searchHistory.articleentity as! Set<ArticleEntity>), id:\.self) { article in
-                        Text(article.title ?? "")
+            List {
+                ForEach($vm.searchHistories, id:\.self) { $searchHistory in
+                    DisclosureGroup {
+                        ForEach(Array(searchHistory.articleentity as! Set<ArticleEntity>), id:\.self) { article in
+                            Text(article.title ?? "")
+                        }
+                    } label: {
+                        Text(searchHistory.searchText ?? "")
                     }
-                } label: {
-                    Text(searchHistory.searchText ?? "")
                 }
-
+                .onDelete(perform: { indexSet in
+                    vm.deleteSearchHistory(indexSet: indexSet)
+                })
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
