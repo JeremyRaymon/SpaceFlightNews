@@ -12,6 +12,8 @@ class ArticleListViewModel: ObservableObject {
     @Published var selectedNewsSite = "All"
     @Published var articles: [Article] = []
     @Published var newsSites: [String] = []
+    @Published var isLoading = true
+    
     var offset: Int = 0
     
     var filteredArticles: [Article] {

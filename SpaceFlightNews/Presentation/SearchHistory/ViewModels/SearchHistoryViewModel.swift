@@ -8,8 +8,10 @@
 import Foundation
 
 class SearchHistoryViewModel: ObservableObject {
-    @Published var searchHistories: [SearchHistoryEntity] = []
     let cdm = CoreDataManager.shared
+    
+    @Published var searchHistories: [SearchHistoryEntity] = []
+    @Published var alertIsPresented = false
     
     func loadSearchHistory() {
         searchHistories = cdm.searchHistories
@@ -20,10 +22,15 @@ class SearchHistoryViewModel: ObservableObject {
             print(index)
             cdm.deleteSearchHistory(index: index)
         }
+        loadSearchHistory()
     }
     
     func deleteAllSearchHistory() {
         cdm.deleteAllSearchHistory()
         loadSearchHistory()
+    }
+    
+    func getArticleArray(searchHistory: SearchHistoryEntity) -> Array<ArticleEntity> {
+        Array(searchHistory.articleentity as! Set<ArticleEntity>)
     }
 }

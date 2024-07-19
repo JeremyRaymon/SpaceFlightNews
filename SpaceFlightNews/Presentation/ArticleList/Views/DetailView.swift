@@ -27,11 +27,8 @@ struct DetailView: View {
                         .resizable()
                         .scaledToFit()
                 } placeholder: {
-                    ProgressView()
+                    ProgressView("Loading Image")
                         .controlSize(.extraLarge)
-//                    Image(systemName: "newspaper.fill")
-//                        .resizable()
-//                        .frame(width: 160, height: 160)
                 }
                 .frame(maxWidth: .infinity, minHeight: 160, alignment: .center)
                 VStack(alignment: .leading) {
@@ -39,13 +36,20 @@ struct DetailView: View {
                         .font(.title)
                     HStack {
                         Text(article.newsSite)
-                            .font(.subheadline)
                             .bold()
                         Spacer()
                         Text(article.publishedAt.convertToLongDateTimeFormat())
-                            .font(.subheadline)
                     }
+                    .font(.subheadline)
+                    .padding(.bottom)
                     Text(shortenedSummary)
+                        .padding(.bottom)
+                    Link(destination: URL(string: article.url)!, label: {
+                        HStack {
+                            Spacer()
+                            Label("Original Article", systemImage: "link")
+                        }
+                    })
                     
                 }
                 .padding()

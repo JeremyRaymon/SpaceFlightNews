@@ -48,10 +48,6 @@ class CoreDataManager: ObservableObject {
         
         do {
             searchHistories = try context.fetch(request)
-            print(searchHistories.count)
-            for searchHistory in searchHistories {
-                print(searchHistory.articleentity?.count)
-            }
         } catch {
             print(CoreDataError.fetchError)
         }
@@ -73,8 +69,8 @@ class CoreDataManager: ObservableObject {
         articleEntity.title = article.title
         articleEntity.newssite = article.newsSite
         articleEntity.summary = article.summary
-        articleEntity.searchhistoryentity = searchHistory
         
+        articleEntity.searchhistoryentity = searchHistory
         save()
     }
     
