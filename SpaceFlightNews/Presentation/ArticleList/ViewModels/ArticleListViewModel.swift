@@ -35,6 +35,5 @@ class ArticleListViewModel: ObservableObject {
     
     func saveSearchHistory() {
         CoreDataManager.shared.addSearchHistory(searchText: searchText, articles: filteredArticles)
-        print(CoreDataManager.shared.searchHistories)
     }
 }

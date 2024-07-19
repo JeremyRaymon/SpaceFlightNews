@@ -19,7 +19,6 @@ class SearchHistoryViewModel: ObservableObject {
     
     func deleteSearchHistory(indexSet: IndexSet) {
         for index in indexSet {
-            print(index)
             cdm.deleteSearchHistory(index: index)
         }
         loadSearchHistory()
