@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class ArticleListViewModel: ObservableObject {
     @Published var searchText = ""
@@ -33,7 +34,7 @@ class ArticleListViewModel: ObservableObject {
         articles.append(contentsOf: try await NetworkManager.shared.fetchArticles(offset: offset))
     }
     
-    func saveSearchHistory() {
-        CoreDataManager.shared.addSearchHistory(searchText: searchText, articles: filteredArticles)
+    func saveSearchHistory(context: NSManagedObjectContext) {
+        CoreDataManager.shared.addSearchHistory(context: context, searchText: searchText, articles: filteredArticles)
     }
 }

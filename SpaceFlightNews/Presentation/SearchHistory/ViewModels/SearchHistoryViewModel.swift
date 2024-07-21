@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class SearchHistoryViewModel: ObservableObject {
     let cdm = CoreDataManager.shared
@@ -19,15 +20,15 @@ class SearchHistoryViewModel: ObservableObject {
         searchHistories = cdm.searchHistories
     }
     
-    func deleteSearchHistory(indexSet: IndexSet) {
+    func deleteSearchHistory(context: NSManagedObjectContext,indexSet: IndexSet) {
         for index in indexSet {
-            cdm.deleteSearchHistory(index: index)
+            cdm.deleteSearchHistory(context: context, index: index)
         }
         loadSearchHistory()
     }
     
-    func deleteAllSearchHistory() {
-        cdm.deleteAllSearchHistory()
+    func deleteAllSearchHistory(context: NSManagedObjectContext) {
+        cdm.deleteAllSearchHistory(context: context)
         loadSearchHistory()
     }
     

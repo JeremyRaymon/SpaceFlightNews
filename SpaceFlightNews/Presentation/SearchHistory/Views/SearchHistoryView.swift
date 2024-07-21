@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchHistoryView: View {
     @StateObject var vm = SearchHistoryViewModel()
+    @Environment(\.managedObjectContext) var moc
     
     var body: some View {
         VStack {
@@ -38,7 +39,7 @@ struct SearchHistoryView: View {
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        vm.deleteSearchHistory(indexSet: indexSet)
+                        vm.deleteSearchHistory(context: moc, indexSet: indexSet)
                     })
                 }
                 .sheet(isPresented: $vm.sheetIsPresented, content: {
@@ -48,7 +49,7 @@ struct SearchHistoryView: View {
                 .alert("Delete all Search History", isPresented: $vm.alertIsPresented) {
                     Button("Cancel", role: .cancel) { }
                     Button("Delete All", role: .destructive) {
-                        vm.deleteAllSearchHistory()
+                        vm.deleteAllSearchHistory(context: moc)
                     }
                 } message: {
                     Text("Are you sure you want to delete all search history?")

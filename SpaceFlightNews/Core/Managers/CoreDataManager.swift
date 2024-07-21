@@ -24,25 +24,23 @@ class CoreDataManager: ObservableObject {
                 
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            self.fetchSearchHistories()
+            self.fetchSearchHistories(context: self.container.viewContext)
         }
     }
     
-    var context: NSManagedObjectContext {
-        return container.viewContext
-    }
     
-    func save() {
+    
+    func save(context: NSManagedObjectContext) {
         guard context.hasChanges else { return }
         do {
             try context.save()
-            self.fetchSearchHistories()
+            self.fetchSearchHistories(context: context)
         } catch {
             print(CoreDataError.saveError)
         }
     }
     
-    func fetchSearchHistories() {
+    func fetchSearchHistories(context: NSManagedObjectContext) {
         let request = NSFetchRequest<SearchHistoryEntity>(entityName: "SearchHistoryEntity")
         
         do {
@@ -52,17 +50,17 @@ class CoreDataManager: ObservableObject {
         }
     }
     
-    func addSearchHistory(searchText: String, articles: [Article]) {
+    func addSearchHistory(context: NSManagedObjectContext, searchText: String, articles: [Article]) {
         let searchHistoryEntity = SearchHistoryEntity(context: context)
         searchHistoryEntity.searchText = searchText
         for article in articles {
-            addArticle(article: article, searchHistory: searchHistoryEntity)
+            addArticle(context: context, article: article, searchHistory: searchHistoryEntity)
         }
         
-        save()
+        save(context: context)
     }
     
-    func addArticle(article: Article, searchHistory: SearchHistoryEntity) {
+    func addArticle(context: NSManagedObjectContext, article: Article, searchHistory: SearchHistoryEntity) {
         let articleEntity = ArticleEntity(context: context)
         articleEntity.id = Int32(article.id)
         articleEntity.title = article.title
@@ -72,17 +70,17 @@ class CoreDataManager: ObservableObject {
         articleEntity.url = article.url
         
         articleEntity.searchhistoryentity = searchHistory
-        save()
+        save(context: context)
     }
     
-    func deleteSearchHistory(index: Int) {
+    func deleteSearchHistory(context: NSManagedObjectContext, index: Int) {
         let searchHistory = searchHistories[index]
         context.delete(searchHistory)
         self.searchHistories.remove(at: index)
-        save()
+        save(context: context)
     }
     
-    func deleteAllSearchHistory() {
+    func deleteAllSearchHistory(context: NSManagedObjectContext) {
         let request = NSFetchRequest<SearchHistoryEntity>(entityName: "SearchHistoryEntity")
         let searchHistories = try? context.fetch(request)
         
@@ -91,6 +89,6 @@ class CoreDataManager: ObservableObject {
         }
         self.searchHistories.removeAll()
         
-        save()
+        save(context: context)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ArticleListView: View {
     @StateObject var vm = ArticleListViewModel()
+    @Environment(\.managedObjectContext) var moc
     
     var body: some View {
         NavigationStack {
@@ -79,7 +80,7 @@ struct ArticleListView: View {
         }
         .padding(.bottom)
         .onSubmit(of: .search) {
-            vm.saveSearchHistory()
+            vm.saveSearchHistory(context: moc)
         }
         .task {
             do {

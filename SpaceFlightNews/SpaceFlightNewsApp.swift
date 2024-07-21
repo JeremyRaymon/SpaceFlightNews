@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct SpaceFlightNewsApp: App {
+    @StateObject private var coreDataManager = CoreDataManager.shared
+    
     var body: some Scene {
         WindowGroup {
             ArticleListView()
-                .environment(\.managedObjectContext, CoreDataManager.shared.context)
+                .environment(\.managedObjectContext, coreDataManager.container.viewContext)
         }
     }
 }
