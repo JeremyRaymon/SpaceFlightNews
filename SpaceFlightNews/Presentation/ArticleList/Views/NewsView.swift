@@ -12,7 +12,6 @@ struct NewsView: View {
     
     var body: some View {
         HStack {
-            
             VStack(alignment: .leading) {
                 Text(article.title)
                 Text(article.newsSite)

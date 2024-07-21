@@ -79,6 +79,7 @@ struct ArticleListView: View {
             }
             .navigationTitle("Articles")
             .searchable(text: $vm.searchText, placement: .toolbar, prompt: "Search Title...")
+            .autocorrectionDisabled()
         }
         .padding(.bottom)
         .onSubmit(of: .search) {
