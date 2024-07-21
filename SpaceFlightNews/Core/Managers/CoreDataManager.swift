@@ -20,7 +20,6 @@ class CoreDataManager: ObservableObject {
     
     private init() {
         container.loadPersistentStores { storeDescription, error in
-//            self.deleteAllSearchHistory()
             if let error = error as? NSError {
                 
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -67,8 +66,10 @@ class CoreDataManager: ObservableObject {
         let articleEntity = ArticleEntity(context: context)
         articleEntity.id = Int32(article.id)
         articleEntity.title = article.title
+        articleEntity.image = article.imageUrl
         articleEntity.newssite = article.newsSite
         articleEntity.summary = article.summary
+        articleEntity.url = article.url
         
         articleEntity.searchhistoryentity = searchHistory
         save()

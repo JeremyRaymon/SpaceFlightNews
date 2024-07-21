@@ -23,8 +23,15 @@ struct SearchHistoryView: View {
                             }
                             else {
                                 ForEach(vm.getArticleArray(searchHistory: searchHistory), id:\.self) { article in
-                                    Text(article.title ?? "")
+                                    Button {
+                                        vm.toggleSheet(article: article)
+                                    } label: {
+                                        Text(article.title ?? "")
+                                            .font(.callout)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
                                 }
+                                .deleteDisabled(true)
                             }
                         } label: {
                             Text(searchHistory.searchText ?? "")
@@ -34,6 +41,9 @@ struct SearchHistoryView: View {
                         vm.deleteSearchHistory(indexSet: indexSet)
                     })
                 }
+                .sheet(isPresented: $vm.sheetIsPresented, content: {
+                    DetailView(article: vm.selectedArticle)
+                })
                 .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: vm.searchHistories)
                 .alert("Delete all Search History", isPresented: $vm.alertIsPresented) {
                     Button("Cancel", role: .cancel) { }
@@ -52,7 +62,6 @@ struct SearchHistoryView: View {
                 Button(action: {
                     vm.alertIsPresented.toggle()
                 }, label: {
-//                    Text("Delete All")
                     Image(systemName: "trash")
                 })
                 .tint(.red)

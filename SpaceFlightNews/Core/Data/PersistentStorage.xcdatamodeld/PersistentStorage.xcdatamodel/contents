@@ -2,11 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ArticleEntity" representedClassName="ArticleEntity" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Data"/>
+        <attribute name="image" optional="YES" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Data"/>
         <attribute name="newssite" optional="YES" attributeType="String"/>
         <attribute name="publishedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
         <relationship name="searchhistoryentity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchHistoryEntity" inverseName="articleentity" inverseEntity="SearchHistoryEntity"/>
     </entity>
     <entity name="SearchHistoryEntity" representedClassName="SearchHistoryEntity" syncable="YES" codeGenerationType="class">

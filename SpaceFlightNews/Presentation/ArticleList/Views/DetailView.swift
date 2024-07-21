@@ -57,6 +57,7 @@ struct DetailView: View {
             }
             .padding()
         }
+
         
     }
 }
