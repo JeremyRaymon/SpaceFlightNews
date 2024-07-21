@@ -28,6 +28,10 @@ class ArticleListViewModel: ObservableObject {
         return filteredArticles
     }
     
+    init(articles: [Article] = []) {
+        self.articles = articles
+    }
+    
     @MainActor
     func loadMoreArticles() async throws {
         offset += 10

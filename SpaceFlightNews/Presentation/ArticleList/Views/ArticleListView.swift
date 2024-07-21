@@ -62,7 +62,9 @@ struct ArticleListView: View {
                         }
                         
                     }
-                    .navigationDestination(for: Article.self, destination: DetailView.init)
+                    .navigationDestination(for: Article.self) { article in
+                        DetailView(vm: DetailViewModel(article: article))
+                    }
                     .toolbar(content: {
                         ToolbarItem(placement: .topBarTrailing) {
                             NavigationLink {

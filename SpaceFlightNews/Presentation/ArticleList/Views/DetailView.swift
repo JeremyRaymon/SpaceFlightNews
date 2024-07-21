@@ -8,21 +8,12 @@
 import SwiftUI
 
 struct DetailView: View {
-    let article: Article
-    
-    var shortenedSummary: String {
-        let sum = article.summary
-        guard let dotIndex = sum.firstIndex(where: {$0 == "."}) else {
-            return sum
-        }
-        let index = sum.distance(from: sum.startIndex, to: dotIndex)
-        return String(article.summary.prefix(index) + ".")
-    }
+    @StateObject var vm: DetailViewModel
     
     var body: some View {
         ScrollView {
             VStack {
-                AsyncImage(url: URL(string: article.imageUrl)) { image in
+                AsyncImage(url: URL(string: vm.article.imageUrl)) { image in
                     image
                         .resizable()
                         .scaledToFit()
@@ -32,19 +23,19 @@ struct DetailView: View {
                 }
                 .frame(maxWidth: .infinity, minHeight: 160, alignment: .center)
                 VStack(alignment: .leading) {
-                    Text(article.title)
+                    Text(vm.article.title)
                         .font(.title)
                     HStack {
-                        Text(article.newsSite)
+                        Text(vm.article.newsSite)
                             .bold()
                         Spacer()
-                        Text(article.publishedAt.convertToLongDateTimeFormat())
+                        Text(vm.article.publishedAt.convertToLongDateTimeFormat())
                     }
                     .font(.subheadline)
                     .padding(.bottom)
-                    Text(shortenedSummary)
+                    Text(vm.shortenedSummary)
                         .padding(.bottom)
-                    Link(destination: URL(string: article.url)!, label: {
+                    Link(destination: URL(string: vm.article.url)!, label: {
                         HStack {
                             Spacer()
                             Label("Original Article", systemImage: "link")
@@ -63,5 +54,5 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView(article: Article.preview)
+    DetailView(vm: DetailViewModel(article: Article.preview))
 }

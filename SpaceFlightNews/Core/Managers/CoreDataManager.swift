@@ -28,8 +28,6 @@ class CoreDataManager: ObservableObject {
         }
     }
     
-    
-    
     func save(context: NSManagedObjectContext) {
         guard context.hasChanges else { return }
         do {

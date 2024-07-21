@@ -43,7 +43,7 @@ struct SearchHistoryView: View {
                     })
                 }
                 .sheet(isPresented: $vm.sheetIsPresented, content: {
-                    DetailView(article: vm.selectedArticle)
+                    DetailView(vm: DetailViewModel(article: vm.selectedArticle))
                 })
                 .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: vm.searchHistories)
                 .alert("Delete all Search History", isPresented: $vm.alertIsPresented) {

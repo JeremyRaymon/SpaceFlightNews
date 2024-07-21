@@ -29,6 +29,30 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6C3162CB2C4CE2A100FA8E98"
+               BuildableName = "SpaceFlightNewsTests.xctest"
+               BlueprintName = "SpaceFlightNewsTests"
+               ReferencedContainer = "container:SpaceFlightNews.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6C3162E52C4D04EE00FA8E98"
+               BuildableName = "SpaceFlightNewsUITests.xctest"
+               BlueprintName = "SpaceFlightNewsUITests"
+               ReferencedContainer = "container:SpaceFlightNews.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
