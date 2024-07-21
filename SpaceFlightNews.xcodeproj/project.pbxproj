@@ -56,6 +56,7 @@
 		6C96C6002C47CB8700569E37 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		6C96C6022C47CDCD00569E37 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		6C96C60D2C47DF7600569E37 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModel.swift; sourceTree = "<group>"; };
+		6CB3E4C52C4D08E100FAE786 /* SpaceFlightNews.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SpaceFlightNews.xctestplan; sourceTree = "<group>"; };
 		6CDBDFDF2C48103500B22900 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		6CDBDFE32C48153B00B22900 /* PersistentStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersistentStorage.xcdatamodel; sourceTree = "<group>"; };
 		6CF23F282C48CE6400B53190 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 				6C3162DB2C4CE97200FA8E98 /* MockDatas */,
 				6C3162D52C4CE3DE00FA8E98 /* ArticleListViewModelTests.swift */,
 				6C3162D92C4CE6DB00FA8E98 /* DetailViewModelTests.swift */,
+				6CB3E4C52C4D08E100FAE786 /* SpaceFlightNews.xctestplan */,
 			);
 			path = SpaceFlightNewsTests;
 			sourceTree = "<group>";
