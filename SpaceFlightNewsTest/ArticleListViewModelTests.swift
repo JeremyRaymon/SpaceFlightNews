@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import SpaceFlightNews
+@testable import SpaceFlightNews 
 
 final class ArticleListViewModelTests: XCTestCase {
     var sut: ArticleListViewModel!
