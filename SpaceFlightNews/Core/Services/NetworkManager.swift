@@ -13,7 +13,7 @@ enum NetworkError: String, Error {
     case invalidData = "Invalid Data from the server. Please try again."
 }
 
-class NetworkManager {
+class NetworkManager: NetworkService {
     static let shared = NetworkManager()
     let decoder = JSONDecoder()
     let baseURL = "https://api.spaceflightnewsapi.net/v4/"
@@ -65,15 +65,15 @@ class NetworkManager {
         }
     }
     
-    func downloadImage(imageUrl: String) async throws -> Data {
-        guard let url = URL(string: imageUrl) else {
+    func downloadImage(url: String) async throws -> Data {
+        guard let url = URL(string: url) else {
             throw NetworkError.invalidURL
         }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NetworkError.invalidData
+            throw NetworkError.invalidResponse
         }
         
         return data

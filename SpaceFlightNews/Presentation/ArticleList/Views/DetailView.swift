@@ -22,6 +22,7 @@ struct DetailView: View {
                         .controlSize(.extraLarge)
                 }
                 .frame(maxWidth: .infinity, minHeight: 160, alignment: .center)
+                
                 VStack(alignment: .leading) {
                     Text(vm.article.title)
                         .font(.title)

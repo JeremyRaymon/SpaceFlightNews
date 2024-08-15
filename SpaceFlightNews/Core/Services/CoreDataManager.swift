@@ -18,7 +18,17 @@ class CoreDataManager: ObservableObject {
     let container = NSPersistentContainer(name: "PersistentStorage")
     var searchHistories: [SearchHistoryEntity] = []
     
-    private init() {
+    static var preview: CoreDataManager = {
+        let result = CoreDataManager(inMemory: true)
+//        let viewContext = result.container.viewContext
+//        result.createSampleData()
+        return result
+    }()
+    
+    private init(inMemory: Bool = false) {
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
         container.loadPersistentStores { storeDescription, error in
             if let error = error as? NSError {
                 

@@ -7,12 +7,17 @@
 		<key>SpaceFlightNews.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>6C96C5E42C47AC4100569E37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6CFD94E12C4DF76700A30349</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArticleListView: View {
-    @StateObject var vm = ArticleListViewModel()
+    @StateObject var vm = ArticleListViewModel(networkService: NetworkManager.shared, coreDataManager: CoreDataManager.shared)
     @Environment(\.managedObjectContext) var moc
     
     var body: some View {
@@ -54,7 +54,7 @@ struct ArticleListView: View {
                                 .onAppear(perform: {
                                     if vm.filteredArticles.last?.id == article.id {
                                         Task {
-                                            try await vm.loadMoreArticles()
+                                            try await vm.fetchArticles()
                                         }
                                     }
                                 })
@@ -75,7 +75,6 @@ struct ArticleListView: View {
                         }
                     })
                 }
-                
             }
             .navigationTitle("Articles")
             .searchable(text: $vm.searchText, placement: .toolbar, prompt: "Search Title...")
@@ -87,8 +86,8 @@ struct ArticleListView: View {
         }
         .task {
             do {
-                vm.articles.append(contentsOf: try await NetworkManager.shared.fetchArticles())
-                vm.newsSites = try await NetworkManager.shared.fetchNewsSites()
+                try await vm.fetchArticles()
+                try await vm.fetchNewsSites()
                 vm.isLoading = false
             } catch {
                 print("Error fetching articles")
