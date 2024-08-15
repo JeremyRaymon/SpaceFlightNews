@@ -9,6 +9,9 @@ import Foundation
 import CoreData
 
 class ArticleListViewModel: ObservableObject {
+    let networkService: NetworkService
+    let coreDataManager: CoreDataManager
+    
     @Published var searchText = ""
     @Published var selectedNewsSite = "All"
     @Published var articles: [Article] = []
@@ -16,6 +19,12 @@ class ArticleListViewModel: ObservableObject {
     @Published var isLoading = true
     
     var offset: Int = 0
+    
+    init(networkService: NetworkService, coreDataManager: CoreDataManager, articles: [Article] = []) {
+        self.networkService = networkService
+        self.coreDataManager = coreDataManager
+        self.articles = articles
+    }
     
     var filteredArticles: [Article] {
         var filteredArticles = articles
@@ -28,17 +37,18 @@ class ArticleListViewModel: ObservableObject {
         return filteredArticles
     }
     
-    init(articles: [Article] = []) {
-        self.articles = articles
+    @MainActor
+    func fetchNewsSites() async throws {
+        self.newsSites = try await networkService.fetchNewsSites()
     }
     
     @MainActor
-    func loadMoreArticles() async throws {
-        offset += 10
+    func fetchArticles() async throws {
         articles.append(contentsOf: try await NetworkManager.shared.fetchArticles(offset: offset))
+        offset += 10
     }
     
     func saveSearchHistory(context: NSManagedObjectContext) {
-        CoreDataManager.shared.addSearchHistory(context: context, searchText: searchText, articles: filteredArticles)
+        coreDataManager.addSearchHistory(context: context, searchText: searchText, articles: filteredArticles)
     }
 }
