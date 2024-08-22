@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchHistory: Identifiable, Equatable {
+struct SearchHistory: Identifiable, Equatable, Hashable {
     let id = UUID()
     let searchText: String
     let articles: [Article]

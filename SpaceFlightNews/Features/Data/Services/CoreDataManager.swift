@@ -13,6 +13,21 @@ enum CoreDataError: String, Error {
     case saveError = "Error saving data"
 }
 
+extension ArticleEntity {
+    func toArticle() -> Article {
+        Article(
+            id: Int(self.id),
+            title: self.title ?? Article.preview.title,
+            url: self.url ?? Article.preview.url,
+            imageUrl: self.image ?? Article.preview.imageUrl,
+            newsSite: self.newssite ?? Article.preview.newsSite,
+            summary: self.summary ?? Article.preview.summary,
+            publishedAt: self.publishedAt ?? Date()
+        )
+    }
+    
+}
+
 class CoreDataManager: ObservableObject {
     static let shared = CoreDataManager()
     let container = NSPersistentContainer(name: "PersistentStorage")
@@ -42,22 +57,13 @@ class CoreDataManager: ObservableObject {
         }
     }
     
-    func entityToArticle(articleentity: ArticleEntity) -> Article {
-        Article(
-            id: Int(articleentity.id),
-            title: articleentity.title ?? Article.preview.title,
-            url: articleentity.url ?? Article.preview.url,
-            imageUrl: articleentity.image ?? Article.preview.imageUrl,
-            newsSite: articleentity.newssite ?? Article.preview.newsSite,
-            summary: articleentity.summary ?? Article.preview.summary,
-            publishedAt: articleentity.publishedAt ?? Date()
-        )
-    }
-    
     func entityToSearchHistory(searchHistoryEntity: SearchHistoryEntity) -> SearchHistory {
         SearchHistory(
             searchText: searchHistoryEntity.searchText!,
-            articles: searchHistoryEntity.articleentity!.compactMap({$0 as? Article})
+            articles: searchHistoryEntity.articleentity?.compactMap({ entity in
+                let articleEntity = entity as! ArticleEntity
+                return articleEntity.toArticle()
+            }) ?? []
         )
     }
     

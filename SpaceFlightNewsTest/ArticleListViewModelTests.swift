@@ -41,8 +41,9 @@ final class ArticleListViewModelTests: XCTestCase {
     
     func testSaveSearchHistory() {
         sut.searchText = "Test Search"
-        sut.saveSearchHistory(context: cdm.container.viewContext)
-        XCTAssert(cdm.searchHistories.contains(where: {$0.searchText == sut.searchText}))
+        sut.saveSearchHistory()
+        let searchHistories = sut.searchHistoryUseCase.fetchSearchHistories()
+        XCTAssert(searchHistories.contains(where: {$0.searchText == sut.searchText}))
     }
 
     override func setUpWithError() throws {
