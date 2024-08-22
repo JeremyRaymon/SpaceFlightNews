@@ -16,13 +16,7 @@ protocol SearchHistoryRepositoryProtocol {
 }
 
 struct SearchHistoryRepository: SearchHistoryRepositoryProtocol {
-    private let coreDataManager: CoreDataManager
-    private let context: NSManagedObjectContext
-
-    init(coreDataManager: CoreDataManager, context: NSManagedObjectContext) {
-        self.coreDataManager = coreDataManager
-        self.context = context
-    }
+    let coreDataManager: CoreDataManager
 
     func fetchSearchHistories() -> [SearchHistory] {
         return coreDataManager.searchHistories.map {
@@ -31,18 +25,15 @@ struct SearchHistoryRepository: SearchHistoryRepositoryProtocol {
     }
 
     func saveSearchHistory(searchText: String, articles: [Article]) throws {
-//        let context = coreDataManager.container.viewContext
-        coreDataManager.addSearchHistory(context: context, searchText: searchText, articles: articles)
+        coreDataManager.addSearchHistory(searchText: searchText, articles: articles)
     }
 
     func deleteSearchHistory(byIndex index: Int) throws {
-//        let context = coreDataManager.container.viewContext
-        coreDataManager.deleteSearchHistory(context: context, index: index)
+        coreDataManager.deleteSearchHistory(index: index)
     }
 
     func deleteAllSearchHistories() throws {
-        let context = coreDataManager.container.viewContext
-        coreDataManager.deleteAllSearchHistory(context: context)
+        coreDataManager.deleteAllSearchHistory()
     }
 }
 

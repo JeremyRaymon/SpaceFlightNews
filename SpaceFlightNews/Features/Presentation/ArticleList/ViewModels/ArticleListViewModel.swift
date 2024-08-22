@@ -12,6 +12,8 @@ class ArticleListViewModel: ObservableObject {
     let networkService: NetworkService
     let coreDataManager: CoreDataManager
     
+    let searchHistoryUseCase = SearchHistoryUseCases(repository: SearchHistoryRepository(coreDataManager: CoreDataManager.shared))
+    
     @Published var searchText = ""
     @Published var selectedNewsSite = "All"
     @Published var articles: [Article] = []
@@ -49,6 +51,11 @@ class ArticleListViewModel: ObservableObject {
     }
     
     func saveSearchHistory(context: NSManagedObjectContext) {
-        coreDataManager.addSearchHistory(context: context, searchText: searchText, articles: filteredArticles)
+        do {
+            try searchHistoryUseCase.saveSearchHistory(searchText: searchText, articles: filteredArticles)
+        } catch {
+            
+        }
+
     }
 }

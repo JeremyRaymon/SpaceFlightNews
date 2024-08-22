@@ -10,25 +10,39 @@ import CoreData
 
 class SearchHistoryViewModel: ObservableObject {
     let cdm = CoreDataManager.shared
+    let searchHistoryUseCase = SearchHistoryUseCases(repository: SearchHistoryRepository(coreDataManager: CoreDataManager.shared))
     
     @Published var searchHistories: [SearchHistoryEntity] = []
+//    @Published var searchHistories: [SearchHistory] = []
+
     @Published private(set) var selectedArticle: Article = Article.preview
     @Published var alertIsPresented = false
     @Published var sheetIsPresented = false
     
     func loadSearchHistory() {
+//        self.searchHistories = searchHistoryUseCase.fetchSearchHistories()
         searchHistories = cdm.searchHistories
     }
     
     func deleteSearchHistory(context: NSManagedObjectContext,indexSet: IndexSet) {
         for index in indexSet {
-            cdm.deleteSearchHistory(context: context, index: index)
+            do {
+                try searchHistoryUseCase.deleteSearchHistory(byIndex: index)
+            } catch {
+                
+            }
+            
         }
         loadSearchHistory()
     }
     
     func deleteAllSearchHistory(context: NSManagedObjectContext) {
-        cdm.deleteAllSearchHistory(context: context)
+        do {
+            try searchHistoryUseCase.deleteAllSearchHistories()
+        } catch {
+            
+        }
+        
         loadSearchHistory()
     }
     
