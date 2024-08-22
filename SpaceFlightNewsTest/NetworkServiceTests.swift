@@ -37,6 +37,14 @@ final class NetworkServiceTests: XCTestCase {
         let image = try await sut.downloadImage(url: "https://picsum.photos/200/300")
         XCTAssertNotNil(image)
     }
+    func testDownloadImage_InvalidURL() async throws {
+        do {
+            _ = try await sut.downloadImage(url: "Random URL")
+            XCTFail()
+        } catch {
+
+        }
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

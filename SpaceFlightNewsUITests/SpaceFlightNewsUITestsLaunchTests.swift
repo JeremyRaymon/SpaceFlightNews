@@ -2,7 +2,7 @@
 //  SpaceFlightNewsUITestsLaunchTests.swift
 //  SpaceFlightNewsUITests
 //
-//  Created by Jeremy Raymond on 14/08/24.
+//  Created by Jeremy Raymond on 15/08/24.
 //
 
 import XCTest
@@ -15,6 +15,8 @@ final class SpaceFlightNewsUITestsLaunchTests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launch()
     }
 
     func testLaunch() throws {

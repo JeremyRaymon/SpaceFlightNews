@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ArticleListView: View {
-    @StateObject var vm = ArticleListViewModel(networkService: NetworkManager.shared, coreDataManager: CoreDataManager.shared)
+    @ObservedObject var vm: ArticleListViewModel
     @Environment(\.managedObjectContext) var moc
+    
+    init(context: NSManagedObjectContext) {
+        self.vm = ArticleListViewModel(networkService: NetworkManager.shared, coreDataManager: CoreDataManager.shared, context: context)
+    }
     
     var body: some View {
         NavigationStack {
@@ -17,6 +22,7 @@ struct ArticleListView: View {
                 if vm.isLoading {
                     ProgressView("Loading Articles")
                         .controlSize(.extraLarge)
+                        .accessibilityIdentifier("LoadingIndicator")
                 }
                 else {
                     List {
@@ -28,6 +34,7 @@ struct ArticleListView: View {
                                 }
                             }
                             .pickerStyle(.menu)
+                            .accessibilityIdentifier("News Site")
                         }
                         if vm.filteredArticles.isEmpty {
                             Section {
@@ -62,16 +69,19 @@ struct ArticleListView: View {
                         }
                         
                     }
+                    .accessibilityIdentifier("List")
                     .navigationDestination(for: Article.self) { article in
                         DetailView(vm: DetailViewModel(article: article))
                     }
                     .toolbar(content: {
                         ToolbarItem(placement: .topBarTrailing) {
                             NavigationLink {
-                                SearchHistoryView()
+                                SearchHistoryView(context: moc)
                             } label: {
                                 Label("History", systemImage: "clock.arrow.circlepath")
+                                    .accessibilityIdentifier("History")
                             }
+                            
                         }
                     })
                 }
@@ -83,6 +93,7 @@ struct ArticleListView: View {
         .padding(.bottom)
         .onSubmit(of: .search) {
             vm.saveSearchHistory(context: moc)
+//            vm.saveSearchHistory(context: moc)
         }
         .task {
             do {
@@ -92,11 +103,10 @@ struct ArticleListView: View {
             } catch {
                 print("Error fetching articles")
             }
-            
         }
     }
 }
 
-#Preview {
-    ArticleListView()
-}
+//#Preview {
+//    ArticleListView()
+//}

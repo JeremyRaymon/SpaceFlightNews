@@ -11,6 +11,10 @@ import XCTest
 final class DetailViewModelTests: XCTestCase {
     var sut: DetailViewModel!
     
+    override func setUp() {
+        sut = DetailViewModel(article: ArticleBuilder().with(summary: "LoremIpsum.LoremIpsum").build())
+    }
+    
     func testShortenedSummary() {
         XCTAssertEqual(sut.shortenedSummary, "LoremIpsum.")
     }
@@ -18,10 +22,6 @@ final class DetailViewModelTests: XCTestCase {
     func testNoDotShortenedSummary() {
         sut = DetailViewModel(article: ArticleBuilder().with(summary: "LoremIpsum").build())
         XCTAssertEqual(sut.shortenedSummary, "LoremIpsum")
-    }
-    
-    override func setUp() {
-        sut = DetailViewModel(article: ArticleBuilder().with(summary: "LoremIpsum.LoremIpsum").build())
     }
     
     override func tearDown() {

@@ -11,11 +11,13 @@ import SwiftUI
 class MockNetworkManager: NetworkService {
     func fetchArticles(offset: Int) async throws -> [SpaceFlightNews.Article] {
         let mockArticles = [ArticleBuilder.mockArticle, ArticleBuilder.mockArticle, ArticleBuilder.mockArticle]
+        
         return mockArticles
     }
     
     func fetchNewsSites() async throws -> [String] {
         let mockNewsSites = ["News Site 1", "News Site 2", "News Site 3"]
+        
         return mockNewsSites
     }
     

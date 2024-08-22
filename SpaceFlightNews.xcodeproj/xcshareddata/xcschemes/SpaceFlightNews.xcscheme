@@ -50,6 +50,17 @@
                ReferencedContainer = "container:SpaceFlightNews.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6CC983732C6DEFCC009FC1CD"
+               BuildableName = "SpaceFlightNewsUITests.xctest"
+               BlueprintName = "SpaceFlightNewsUITests"
+               ReferencedContainer = "container:SpaceFlightNews.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -11,7 +11,7 @@ struct ArticlesWrapper: Codable {
     let results: [Article]
 }
 
-struct Article: Codable, Hashable {
+struct Article: Codable, Identifiable, Hashable {
     let id: Int
     let title: String
     let url: String

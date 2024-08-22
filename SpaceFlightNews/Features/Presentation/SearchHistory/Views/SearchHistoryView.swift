@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SearchHistoryView: View {
-    @StateObject var vm = SearchHistoryViewModel()
-    @Environment(\.managedObjectContext) var moc
+    @ObservedObject var vm: SearchHistoryViewModel
+    
+    init(context: NSManagedObjectContext) {
+        self.vm = SearchHistoryViewModel(context: context)
+    }
     
     var body: some View {
         VStack {
@@ -17,29 +21,21 @@ struct SearchHistoryView: View {
                 ContentUnavailableView("There is no Search History yet", systemImage: "exclamationmark.arrow.circlepath")
             } else {
                 List {
-                    ForEach($vm.searchHistories, id:\.self) { $searchHistory in
+                    ForEach(vm.searchHistories) { searchHistory in
                         DisclosureGroup {
-                            if vm.getArticleArray(searchHistory: searchHistory).isEmpty {
+                            if vm.searchHistories.isEmpty {
                                 ContentUnavailableView("No Article for this Search History", systemImage: "point.bottomleft.forward.to.point.topright.scurvepath")
                             }
                             else {
-                                ForEach(vm.getArticleArray(searchHistory: searchHistory), id:\.self) { article in
-                                    Button {
-                                        vm.toggleSheet(article: article)
-                                    } label: {
-                                        Text(article.title ?? "")
-                                            .font(.callout)
-                                    }
-                                    .buttonStyle(PlainButtonStyle())
-                                }
-                                .deleteDisabled(true)
+                                MiniArticleListView(articles: searchHistory.articles)
+                                    .environmentObject(vm)
                             }
                         } label: {
-                            Text(searchHistory.searchText ?? "")
+                            Text(searchHistory.searchText)
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        vm.deleteSearchHistory(context: moc, indexSet: indexSet)
+                        vm.deleteSearchHistory(byIndex: indexSet.toInt())
                     })
                 }
                 .sheet(isPresented: $vm.sheetIsPresented, content: {
@@ -49,7 +45,7 @@ struct SearchHistoryView: View {
                 .alert("Delete all Search History", isPresented: $vm.alertIsPresented) {
                     Button("Cancel", role: .cancel) { }
                     Button("Delete All", role: .destructive) {
-                        vm.deleteAllSearchHistory(context: moc)
+                        vm.deleteAllSearchHistory()
                     }
                 } message: {
                     Text("Are you sure you want to delete all search history?")
@@ -74,6 +70,6 @@ struct SearchHistoryView: View {
     }
 }
 
-#Preview {
-    SearchHistoryView()
-}
+//#Preview {
+//    SearchHistoryView(context: moc)
+//}
