@@ -25,6 +25,25 @@ class CoreDataManager: ObservableObject {
         return result
     }()
     
+    func entityToArticle(articleentity: ArticleEntity) -> Article {
+        Article(
+            id: Int(articleentity.id),
+            title: articleentity.title ?? Article.preview.title,
+            url: articleentity.url ?? Article.preview.url,
+            imageUrl: articleentity.image ?? Article.preview.imageUrl,
+            newsSite: articleentity.newssite ?? Article.preview.newsSite,
+            summary: articleentity.summary ?? Article.preview.summary,
+            publishedAt: articleentity.publishedAt ?? Date()
+        )
+    }
+    
+    func entityToSearchHistory(searchHistoryEntity: SearchHistoryEntity) -> SearchHistory {
+        SearchHistory(
+            searchText: searchHistoryEntity.searchText!,
+            articles: searchHistoryEntity.articleentity!.compactMap({$0 as? Article})
+        )
+    }
+    
     private init(inMemory: Bool = false) {
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
