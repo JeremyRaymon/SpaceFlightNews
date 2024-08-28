@@ -17,15 +17,14 @@ extension ArticleEntity {
     func toArticle() -> Article {
         Article(
             id: Int(self.id),
-            title: self.title ?? Article.preview.title,
-            url: self.url ?? Article.preview.url,
-            imageUrl: self.image ?? Article.preview.imageUrl,
-            newsSite: self.newssite ?? Article.preview.newsSite,
-            summary: self.summary ?? Article.preview.summary,
+            title: self.title ?? "Empty Title",
+            url: self.url ?? "Empty URL",
+            imageUrl: self.image ?? "Empty Image URL",
+            newsSite: self.newssite ?? "Empty Newssite",
+            summary: self.summary ?? "Empty Summary",
             publishedAt: self.publishedAt ?? Date()
         )
     }
-    
 }
 
 class CoreDataManager: ObservableObject {

@@ -32,7 +32,4 @@ struct ArticleUseCases: ArticleUseCasesProtocol {
         try await articleRepository.downloadImage(url: url)
     }
     
-   
-    
-    
 }
