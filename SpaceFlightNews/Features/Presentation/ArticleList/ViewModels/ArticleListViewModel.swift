@@ -9,9 +9,8 @@ import Foundation
 import CoreData
 
 class ArticleListViewModel: ObservableObject {
-    let networkService: NetworkService
-    
     let searchHistoryUseCase = SearchHistoryUseCases(repository: SearchHistoryRepository(coreDataManager: CoreDataManager.shared))
+    let articleUseCase = ArticleUseCases(articleRepository: ArticleRepository(networkService: NetworkManager.shared))
     
     @Published var searchText = ""
     @Published var selectedNewsSite = "All"
@@ -21,8 +20,7 @@ class ArticleListViewModel: ObservableObject {
     
     var offset: Int = 0
     
-    init(networkService: NetworkService, articles: [Article] = []) {
-        self.networkService = networkService
+    init(articles: [Article] = []) {
         self.articles = articles
     }
     
@@ -39,12 +37,12 @@ class ArticleListViewModel: ObservableObject {
     
     @MainActor
     func fetchNewsSites() async throws {
-        self.newsSites = try await networkService.fetchNewsSites()
+        self.newsSites = try await articleUseCase.fetchNewsSites()
     }
     
     @MainActor
     func fetchArticles() async throws {
-        articles.append(contentsOf: try await NetworkManager.shared.fetchArticles(offset: offset))
+        articles.append(contentsOf: try await articleUseCase.fetchArticles(offset: offset))
         offset += 10
     }
     

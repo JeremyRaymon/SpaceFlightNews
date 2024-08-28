@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArticleListView: View {
-    @StateObject var vm = ArticleListViewModel(networkService: NetworkManager.shared)
+    @StateObject var vm = ArticleListViewModel()
     @Environment(\.managedObjectContext) var moc
     
     var body: some View {

@@ -47,7 +47,7 @@ final class ArticleListViewModelTests: XCTestCase {
     }
 
     override func setUpWithError() throws {
-        sut = ArticleListViewModel(networkService: NetworkManager.shared, articles: mockArticles)
+        sut = ArticleListViewModel(articles: mockArticles)
     }
     
     override func tearDown() {
