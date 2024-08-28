@@ -9,26 +9,37 @@ import Foundation
 import CoreData
 
 class SearchHistoryViewModel: ObservableObject {
-    let cdm = CoreDataManager.shared
+    let searchHistoryUseCase = SearchHistoryUseCases(repository: SearchHistoryRepository(coreDataManager: CoreDataManager.shared))
     
-    @Published var searchHistories: [SearchHistoryEntity] = []
+    @Published var searchHistories: [SearchHistory] = []
+
     @Published private(set) var selectedArticle: Article = Article.preview
     @Published var alertIsPresented = false
     @Published var sheetIsPresented = false
     
     func loadSearchHistory() {
-        searchHistories = cdm.searchHistories
+        self.searchHistories = searchHistoryUseCase.fetchSearchHistories()
     }
     
-    func deleteSearchHistory(context: NSManagedObjectContext,indexSet: IndexSet) {
+    func deleteSearchHistory(indexSet: IndexSet) {
         for index in indexSet {
-            cdm.deleteSearchHistory(context: context, index: index)
+            do {
+                try searchHistoryUseCase.deleteSearchHistory(byIndex: index)
+            } catch {
+                
+            }
+            
         }
         loadSearchHistory()
     }
     
-    func deleteAllSearchHistory(context: NSManagedObjectContext) {
-        cdm.deleteAllSearchHistory(context: context)
+    func deleteAllSearchHistory() {
+        do {
+            try searchHistoryUseCase.deleteAllSearchHistories()
+        } catch {
+            
+        }
+        
         loadSearchHistory()
     }
     
@@ -36,9 +47,9 @@ class SearchHistoryViewModel: ObservableObject {
         Array(searchHistory.articleentity as! Set<ArticleEntity>)
     }
     
-    func toggleSheet(article: ArticleEntity) {
+    func toggleSheet(article: Article) {
         self.sheetIsPresented.toggle()
-        self.selectedArticle = entityToArticle(articleentity: article)
+        self.selectedArticle = article
     }
     
     private func entityToArticle(articleentity: ArticleEntity) -> Article {

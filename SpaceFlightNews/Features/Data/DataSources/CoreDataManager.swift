@@ -13,6 +13,21 @@ enum CoreDataError: String, Error {
     case saveError = "Error saving data"
 }
 
+extension ArticleEntity {
+    func toArticle() -> Article {
+        Article(
+            id: Int(self.id),
+            title: self.title ?? Article.preview.title,
+            url: self.url ?? Article.preview.url,
+            imageUrl: self.image ?? Article.preview.imageUrl,
+            newsSite: self.newssite ?? Article.preview.newsSite,
+            summary: self.summary ?? Article.preview.summary,
+            publishedAt: self.publishedAt ?? Date()
+        )
+    }
+    
+}
+
 class CoreDataManager: ObservableObject {
     static let shared = CoreDataManager()
     let container = NSPersistentContainer(name: "PersistentStorage")
@@ -20,10 +35,12 @@ class CoreDataManager: ObservableObject {
     
     static var preview: CoreDataManager = {
         let result = CoreDataManager(inMemory: true)
-//        let viewContext = result.container.viewContext
-//        result.createSampleData()
         return result
     }()
+    
+    var context: NSManagedObjectContext {
+        container.viewContext
+    }
     
     private init(inMemory: Bool = false) {
         if inMemory {
@@ -34,23 +51,33 @@ class CoreDataManager: ObservableObject {
                 
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            self.fetchSearchHistories(context: self.container.viewContext)
+            self.fetchSearchHistories()
         }
     }
     
-    func save(context: NSManagedObjectContext) {
+    func entityToSearchHistory(searchHistoryEntity: SearchHistoryEntity) -> SearchHistory {
+        SearchHistory(
+            searchText: searchHistoryEntity.searchText!,
+            articles: searchHistoryEntity.articleentity?.compactMap({ entity in
+                let articleEntity = entity as! ArticleEntity
+                return articleEntity.toArticle()
+            }) ?? []
+        )
+    }
+    
+    func save() {
         guard context.hasChanges else { return }
         do {
             try context.save()
-            self.fetchSearchHistories(context: context)
+            self.fetchSearchHistories()
         } catch {
             print(CoreDataError.saveError)
         }
     }
     
-    func fetchSearchHistories(context: NSManagedObjectContext) {
+    func fetchSearchHistories() {
         let request = NSFetchRequest<SearchHistoryEntity>(entityName: "SearchHistoryEntity")
-        
+                
         do {
             searchHistories = try context.fetch(request)
         } catch {
@@ -58,17 +85,17 @@ class CoreDataManager: ObservableObject {
         }
     }
     
-    func addSearchHistory(context: NSManagedObjectContext, searchText: String, articles: [Article]) {
+    func addSearchHistory(searchText: String, articles: [Article]) {
         let searchHistoryEntity = SearchHistoryEntity(context: context)
         searchHistoryEntity.searchText = searchText
         for article in articles {
-            addArticle(context: context, article: article, searchHistory: searchHistoryEntity)
+            addArticle(article: article, searchHistory: searchHistoryEntity)
         }
         
-        save(context: context)
+        save()
     }
     
-    func addArticle(context: NSManagedObjectContext, article: Article, searchHistory: SearchHistoryEntity) {
+    func addArticle(article: Article, searchHistory: SearchHistoryEntity) {
         let articleEntity = ArticleEntity(context: context)
         articleEntity.id = Int32(article.id)
         articleEntity.title = article.title
@@ -78,17 +105,19 @@ class CoreDataManager: ObservableObject {
         articleEntity.url = article.url
         
         articleEntity.searchhistoryentity = searchHistory
-        save(context: context)
+        save()
     }
     
-    func deleteSearchHistory(context: NSManagedObjectContext, index: Int) {
+    func deleteSearchHistory(index: Int) {
+        
         let searchHistory = searchHistories[index]
         context.delete(searchHistory)
         self.searchHistories.remove(at: index)
-        save(context: context)
+        save()
     }
     
-    func deleteAllSearchHistory(context: NSManagedObjectContext) {
+    func deleteAllSearchHistory() {
+        
         let request = NSFetchRequest<SearchHistoryEntity>(entityName: "SearchHistoryEntity")
         let searchHistories = try? context.fetch(request)
         
@@ -97,6 +126,6 @@ class CoreDataManager: ObservableObject {
         }
         self.searchHistories.removeAll()
         
-        save(context: context)
+        save()
     }
 }

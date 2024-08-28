@@ -10,7 +10,8 @@ import CoreData
 
 class ArticleListViewModel: ObservableObject {
     let networkService: NetworkService
-    let coreDataManager: CoreDataManager
+    
+    let searchHistoryUseCase = SearchHistoryUseCases(repository: SearchHistoryRepository(coreDataManager: CoreDataManager.shared))
     
     @Published var searchText = ""
     @Published var selectedNewsSite = "All"
@@ -20,9 +21,8 @@ class ArticleListViewModel: ObservableObject {
     
     var offset: Int = 0
     
-    init(networkService: NetworkService, coreDataManager: CoreDataManager, articles: [Article] = []) {
+    init(networkService: NetworkService, articles: [Article] = []) {
         self.networkService = networkService
-        self.coreDataManager = coreDataManager
         self.articles = articles
     }
     
@@ -48,7 +48,12 @@ class ArticleListViewModel: ObservableObject {
         offset += 10
     }
     
-    func saveSearchHistory(context: NSManagedObjectContext) {
-        coreDataManager.addSearchHistory(context: context, searchText: searchText, articles: filteredArticles)
+    func saveSearchHistory() {
+        do {
+            try searchHistoryUseCase.saveSearchHistory(searchText: searchText, articles: filteredArticles)
+        } catch {
+            
+        }
+
     }
 }

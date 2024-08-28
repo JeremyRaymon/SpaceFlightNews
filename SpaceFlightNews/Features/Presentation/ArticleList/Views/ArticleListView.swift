@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArticleListView: View {
-    @StateObject var vm = ArticleListViewModel(networkService: NetworkManager.shared, coreDataManager: CoreDataManager.shared)
+    @StateObject var vm = ArticleListViewModel(networkService: NetworkManager.shared)
     @Environment(\.managedObjectContext) var moc
     
     var body: some View {
@@ -82,7 +82,7 @@ struct ArticleListView: View {
         }
         .padding(.bottom)
         .onSubmit(of: .search) {
-            vm.saveSearchHistory(context: moc)
+            vm.saveSearchHistory()
         }
         .task {
             do {

@@ -17,17 +17,17 @@ struct SearchHistoryView: View {
                 ContentUnavailableView("There is no Search History yet", systemImage: "exclamationmark.arrow.circlepath")
             } else {
                 List {
-                    ForEach($vm.searchHistories, id:\.self) { $searchHistory in
+                    ForEach(vm.searchHistories, id:\.self) { searchHistory in
                         DisclosureGroup {
-                            if vm.getArticleArray(searchHistory: searchHistory).isEmpty {
+                            if searchHistory.articles.isEmpty {
                                 ContentUnavailableView("No Article for this Search History", systemImage: "point.bottomleft.forward.to.point.topright.scurvepath")
                             }
                             else {
-                                ForEach(vm.getArticleArray(searchHistory: searchHistory), id:\.self) { article in
+                                ForEach(searchHistory.articles, id:\.self) { article in
                                     Button {
                                         vm.toggleSheet(article: article)
                                     } label: {
-                                        Text(article.title ?? "")
+                                        Text(article.title)
                                             .font(.callout)
                                     }
                                     .buttonStyle(PlainButtonStyle())
@@ -35,11 +35,11 @@ struct SearchHistoryView: View {
                                 .deleteDisabled(true)
                             }
                         } label: {
-                            Text(searchHistory.searchText ?? "")
+                            Text(searchHistory.searchText)
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        vm.deleteSearchHistory(context: moc, indexSet: indexSet)
+                        vm.deleteSearchHistory(indexSet: indexSet)
                     })
                 }
                 .sheet(isPresented: $vm.sheetIsPresented, content: {
@@ -49,7 +49,7 @@ struct SearchHistoryView: View {
                 .alert("Delete all Search History", isPresented: $vm.alertIsPresented) {
                     Button("Cancel", role: .cancel) { }
                     Button("Delete All", role: .destructive) {
-                        vm.deleteAllSearchHistory(context: moc)
+                        vm.deleteAllSearchHistory()
                     }
                 } message: {
                     Text("Are you sure you want to delete all search history?")

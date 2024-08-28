@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct ArticlesWrapper: Codable {
-    let results: [Article]
-}
-
 struct Article: Codable, Hashable {
     let id: Int
     let title: String

@@ -23,8 +23,13 @@
 		6C96C6012C47CB8700569E37 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C6002C47CB8700569E37 /* DetailView.swift */; };
 		6C96C6032C47CDCD00569E37 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C6022C47CDCD00569E37 /* Date+Ext.swift */; };
 		6C96C60E2C47DF7600569E37 /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C96C60D2C47DF7600569E37 /* ArticleListViewModel.swift */; };
+		6CC9F07A2C76D1DD009A7734 /* PersistentStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6CC9F0782C76D1DD009A7734 /* PersistentStorage.xcdatamodeld */; };
+		6CC9F07C2C76D1EE009A7734 /* IndexSet+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC9F07B2C76D1EE009A7734 /* IndexSet+Ext.swift */; };
+		6CC9F07E2C76D1FD009A7734 /* SearchHistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC9F07D2C76D1FD009A7734 /* SearchHistoryRepository.swift */; };
+		6CC9F0802C76D207009A7734 /* SearchHistoryUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC9F07F2C76D207009A7734 /* SearchHistoryUseCases.swift */; };
+		6CC9F0822C76D228009A7734 /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC9F0812C76D228009A7734 /* SearchHistory.swift */; };
 		6CDBDFE02C48103500B22900 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDBDFDF2C48103500B22900 /* CoreDataManager.swift */; };
-		6CDBDFE42C48153B00B22900 /* PersistentStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6CDBDFE22C48153B00B22900 /* PersistentStorage.xcdatamodeld */; };
+		6CEDA62C2C7EBB9300F12F77 /* ArticlesWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDA62B2C7EBB9300F12F77 /* ArticlesWrapper.swift */; };
 		6CF23F292C48CE6400B53190 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF23F282C48CE6400B53190 /* SearchHistoryViewModel.swift */; };
 		6CF3C3AA2C482FAC0046082A /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF3C3A92C482FAC0046082A /* SearchHistoryView.swift */; };
 		6CFD94EB2C4DF76E00A30349 /* DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3162D92C4CE6DB00FA8E98 /* DetailViewModelTests.swift */; };
@@ -63,8 +68,13 @@
 		6C96C6002C47CB8700569E37 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		6C96C6022C47CDCD00569E37 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		6C96C60D2C47DF7600569E37 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModel.swift; sourceTree = "<group>"; };
+		6CC9F0792C76D1DD009A7734 /* PersistentStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersistentStorage.xcdatamodel; sourceTree = "<group>"; };
+		6CC9F07B2C76D1EE009A7734 /* IndexSet+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IndexSet+Ext.swift"; sourceTree = "<group>"; };
+		6CC9F07D2C76D1FD009A7734 /* SearchHistoryRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryRepository.swift; sourceTree = "<group>"; };
+		6CC9F07F2C76D207009A7734 /* SearchHistoryUseCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryUseCases.swift; sourceTree = "<group>"; };
+		6CC9F0812C76D228009A7734 /* SearchHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
 		6CDBDFDF2C48103500B22900 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		6CDBDFE32C48153B00B22900 /* PersistentStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersistentStorage.xcdatamodel; sourceTree = "<group>"; };
+		6CEDA62B2C7EBB9300F12F77 /* ArticlesWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesWrapper.swift; sourceTree = "<group>"; };
 		6CF23F282C48CE6400B53190 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
 		6CF23F2A2C49016B00B53190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6CF3C3A92C482FAC0046082A /* SearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryView.swift; sourceTree = "<group>"; };
@@ -119,11 +129,9 @@
 		6C96C5E72C47AC4100569E37 /* SpaceFlightNews */ = {
 			isa = PBXGroup;
 			children = (
-				6CF23F2A2C49016B00B53190 /* Info.plist */,
 				6C96C6042C47DC7D00569E37 /* Core */,
-				6C96C6052C47DC8100569E37 /* Presentation */,
-				6C96C5E82C47AC4100569E37 /* SpaceFlightNewsApp.swift */,
-				6C96C5EC2C47AC4200569E37 /* Assets.xcassets */,
+				6CC9F0712C76D164009A7734 /* Features */,
+				6CF23F2A2C49016B00B53190 /* Info.plist */,
 				6C96C5EE2C47AC4200569E37 /* Preview Content */,
 			);
 			path = SpaceFlightNews;
@@ -140,10 +148,9 @@
 		6C96C6042C47DC7D00569E37 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6CDBDFE12C48152E00B22900 /* Data */,
-				6C96C60C2C47DD9B00569E37 /* Services */,
+				6CC9F0772C76D1B8009A7734 /* Resources */,
+				6CC9F0762C76D1B0009A7734 /* Config */,
 				6C96C60B2C47DD8C00569E37 /* Extensions */,
-				6C96C60A2C47DD8600569E37 /* Entities */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -188,8 +195,8 @@
 		6C96C60A2C47DD8600569E37 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				6C96C5FE2C47BDD100569E37 /* NewsSitesWrapper.swift */,
 				6C96C5FA2C47B78A00569E37 /* Article.swift */,
+				6CC9F0812C76D228009A7734 /* SearchHistory.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -198,26 +205,90 @@
 			isa = PBXGroup;
 			children = (
 				6C96C6022C47CDCD00569E37 /* Date+Ext.swift */,
+				6CC9F07B2C76D1EE009A7734 /* IndexSet+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		6C96C60C2C47DD9B00569E37 /* Services */ = {
+		6C96C60C2C47DD9B00569E37 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
 				6C96C5F82C47B62600569E37 /* NetworkManager.swift */,
 				6CDBDFDF2C48103500B22900 /* CoreDataManager.swift */,
 				6C52BEC72C6C4DC6002D97BB /* NetworkService.swift */,
 			);
-			path = Services;
+			path = DataSources;
 			sourceTree = "<group>";
 		};
-		6CDBDFE12C48152E00B22900 /* Data */ = {
+		6CC9F0712C76D164009A7734 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				6CDBDFE22C48153B00B22900 /* PersistentStorage.xcdatamodeld */,
+				6C96C6052C47DC8100569E37 /* Presentation */,
+				6CC9F0742C76D190009A7734 /* Domain */,
+				6CC9F0722C76D16C009A7734 /* Data */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		6CC9F0722C76D16C009A7734 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6CDBDFE12C48152E00B22900 /* Models */,
+				6C96C60C2C47DD9B00569E37 /* DataSources */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		6CC9F0732C76D174009A7734 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				6CC9F07D2C76D1FD009A7734 /* SearchHistoryRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		6CC9F0742C76D190009A7734 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				6CC9F0732C76D174009A7734 /* Repositories */,
+				6C96C60A2C47DD8600569E37 /* Entities */,
+				6CC9F0752C76D196009A7734 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		6CC9F0752C76D196009A7734 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				6CC9F07F2C76D207009A7734 /* SearchHistoryUseCases.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		6CC9F0762C76D1B0009A7734 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				6C96C5E82C47AC4100569E37 /* SpaceFlightNewsApp.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		6CC9F0772C76D1B8009A7734 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6C96C5EC2C47AC4200569E37 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6CDBDFE12C48152E00B22900 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6CC9F0782C76D1DD009A7734 /* PersistentStorage.xcdatamodeld */,
+				6C96C5FE2C47BDD100569E37 /* NewsSitesWrapper.swift */,
+				6CEDA62B2C7EBB9300F12F77 /* ArticlesWrapper.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		6CF23F252C48CE4C00B53190 /* SearchHistory */ = {
@@ -357,19 +428,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CC9F0802C76D207009A7734 /* SearchHistoryUseCases.swift in Sources */,
+				6CC9F0822C76D228009A7734 /* SearchHistory.swift in Sources */,
 				6C52BEC82C6C4DC6002D97BB /* NetworkService.swift in Sources */,
 				6C96C5F92C47B62600569E37 /* NetworkManager.swift in Sources */,
 				6C96C5FB2C47B78B00569E37 /* Article.swift in Sources */,
-				6CDBDFE42C48153B00B22900 /* PersistentStorage.xcdatamodeld in Sources */,
 				6C96C5F72C47ACA200569E37 /* NewsView.swift in Sources */,
 				6C96C6032C47CDCD00569E37 /* Date+Ext.swift in Sources */,
 				6CF3C3AA2C482FAC0046082A /* SearchHistoryView.swift in Sources */,
 				6C96C60E2C47DF7600569E37 /* ArticleListViewModel.swift in Sources */,
+				6CC9F07E2C76D1FD009A7734 /* SearchHistoryRepository.swift in Sources */,
 				6CF23F292C48CE6400B53190 /* SearchHistoryViewModel.swift in Sources */,
 				6C96C6012C47CB8700569E37 /* DetailView.swift in Sources */,
+				6CEDA62C2C7EBB9300F12F77 /* ArticlesWrapper.swift in Sources */,
 				6C3162D82C4CE4A400FA8E98 /* DetailViewModel.swift in Sources */,
 				6C96C5EB2C47AC4100569E37 /* ArticleListView.swift in Sources */,
+				6CC9F07A2C76D1DD009A7734 /* PersistentStorage.xcdatamodeld in Sources */,
 				6C96C5E92C47AC4100569E37 /* SpaceFlightNewsApp.swift in Sources */,
+				6CC9F07C2C76D1EE009A7734 /* IndexSet+Ext.swift in Sources */,
 				6CDBDFE02C48103500B22900 /* CoreDataManager.swift in Sources */,
 				6C96C5FF2C47BDD100569E37 /* NewsSitesWrapper.swift in Sources */,
 			);
@@ -647,14 +723,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6CDBDFE22C48153B00B22900 /* PersistentStorage.xcdatamodeld */ = {
+		6CC9F0782C76D1DD009A7734 /* PersistentStorage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6CDBDFE32C48153B00B22900 /* PersistentStorage.xcdatamodel */,
+				6CC9F0792C76D1DD009A7734 /* PersistentStorage.xcdatamodel */,
 			);
-			currentVersion = 6CDBDFE32C48153B00B22900 /* PersistentStorage.xcdatamodel */;
+			currentVersion = 6CC9F0792C76D1DD009A7734 /* PersistentStorage.xcdatamodel */;
 			name = PersistentStorage.xcdatamodeld;
-			path = /Users/jeremyraymond/Documents/Developer/IOS/IOSProjects/SpaceFlightNews/SpaceFlightNews/Core/Data/PersistentStorage.xcdatamodeld;
+			path = "/Users/jeremyraymond/Documents/Developer/IOS/IOSProjects/SpaceFlightNews copy/SpaceFlightNews/Features/Data/Models/PersistentStorage.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
