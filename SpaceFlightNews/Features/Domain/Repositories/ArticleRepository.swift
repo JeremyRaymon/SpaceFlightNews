@@ -7,13 +7,7 @@
 
 import Foundation
 
-protocol ArticleRepositoryProtocol {
-    func fetchArticles(offset: Int ) async throws -> [Article]
-    func fetchNewsSites() async throws -> [String]
-    func downloadImage(url: String) async throws -> Data
-}
-
-struct ArticleRepository: ArticleRepositoryProtocol {
+struct ArticleRepository: ArticleUseCasesProtocol {
     let networkService: NetworkService
     
     func fetchArticles(offset: Int = 0) async throws -> [Article] {

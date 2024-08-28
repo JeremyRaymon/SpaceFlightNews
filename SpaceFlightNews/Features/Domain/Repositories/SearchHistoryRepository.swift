@@ -8,14 +8,7 @@
 import Foundation
 import CoreData
 
-protocol SearchHistoryRepositoryProtocol {
-    func fetchSearchHistories() -> [SearchHistory]
-    func saveSearchHistory(searchText: String, articles: [Article]) throws
-    func deleteSearchHistory(byIndex index: Int) throws
-    func deleteAllSearchHistories() throws
-}
-
-struct SearchHistoryRepository: SearchHistoryRepositoryProtocol {
+struct SearchHistoryRepository: SearchHistoryUseCasesProtocol {
     let coreDataManager: CoreDataManager
 
     func fetchSearchHistories() -> [SearchHistory] {
