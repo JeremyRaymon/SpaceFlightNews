@@ -35,8 +35,6 @@ class CoreDataManager: ObservableObject {
     
     static var preview: CoreDataManager = {
         let result = CoreDataManager(inMemory: true)
-//        let viewContext = result.container.viewContext
-//        result.createSampleData()
         return result
     }()
     
